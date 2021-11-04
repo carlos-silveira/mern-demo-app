@@ -5,12 +5,17 @@ export default class StudentList extends Component {
     state = {
         users: []
       }
-    
+
     componentDidMount() {
-        axios.get(`http://localhost:4000/students`)
+        const PORT = process.env.PORT || 4000;
+        axios.get(`http://localhost:${PORT}/students`)
           .then(res => {
             const users = res.data;
             this.setState({ users });
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
           })
       }
       render() {
